@@ -1,0 +1,22 @@
+[project]
+name = "word-judge"
+version = "0.1.0"
+description = "This is a ia-text-detector for the MLE course project"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "setuptools>=75.6.0",
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages]
+find = {}
+
+[project.scripts]
+wordjudge = "src.main:main"

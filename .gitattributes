@@ -1,0 +1,12 @@
+data/argugpt.csv filter=lfs diff=lfs merge=lfs -text
+data/machine-dev.csv filter=lfs diff=lfs merge=lfs -text
+data/test_essays.csv filter=lfs diff=lfs merge=lfs -text
+data/train_drcat_01.csv filter=lfs diff=lfs merge=lfs -text
+data/train_drcat_02.csv filter=lfs diff=lfs merge=lfs -text
+data/train_drcat_04.csv filter=lfs diff=lfs merge=lfs -text
+data/train_prompts.csv filter=lfs diff=lfs merge=lfs -text
+data/machine-test.csv filter=lfs diff=lfs merge=lfs -text
+data/machine-train.csv filter=lfs diff=lfs merge=lfs -text
+data/sample_submission.csv filter=lfs diff=lfs merge=lfs -text
+data/train_drcat_03.csv filter=lfs diff=lfs merge=lfs -text
+data/train_essays.csv filter=lfs diff=lfs merge=lfs -text
