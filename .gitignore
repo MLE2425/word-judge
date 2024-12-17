@@ -16,4 +16,4 @@ wheels/
 .LSOverride
 
 # Data
-data/
+data/*.csv
