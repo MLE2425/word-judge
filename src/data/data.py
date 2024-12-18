@@ -23,7 +23,7 @@ def load_and_merge_sources() -> pl.DataFrame:
         source: pl.DataFrame
         try:
             source = pl.read_csv(f"{CFG.data_dir}/{csv}", separator=sep)
-        except Exception as _:
+        except Exception:
             logger.debug(f"Error reading {csv}")
             continue
 
@@ -37,13 +37,9 @@ def load_and_merge_sources() -> pl.DataFrame:
                 generated=pl.lit(1 if CFG.source_ia[key] else 0)
             )
 
-        source = source.select(
-            ["text", "generated"]
-        )
+        source = source.select(["text", "generated"])
 
-        source = source.with_columns(
-            generated=source["generated"].cast(pl.Int8)
-        )
+        source = source.with_columns(generated=source["generated"].cast(pl.Int8))
 
         if CFG.add_source_to_data:
             source = source.with_columns(
