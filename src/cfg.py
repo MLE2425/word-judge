@@ -1,7 +1,7 @@
-import logging
+import os
 
 class CFG:
-    data_dir: str = 'data/'
+    data_dir: str = os.path.join(os.path.dirname(__file__), "../data")
     source_ia: dict[list[str], bool | None,] = {
         "argupt.*" : True,
         "machine-.*": True,
