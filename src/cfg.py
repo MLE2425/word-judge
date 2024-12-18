@@ -1,9 +1,13 @@
 import os
 
+
 class CFG:
     data_dir: str = os.path.join(os.path.dirname(__file__), "../data")
-    source_ia: dict[list[str], bool | None,] = {
-        "argupt.*" : True,
+    source_ia: dict[
+        list[str],
+        bool | None,
+    ] = {
+        "argupt.*": True,
         "machine-.*": True,
         "train_drcat.*": True,
         "drcat_v3.*": None,
@@ -12,7 +16,7 @@ class CFG:
         "ivypanda.*": False,
     }
     source_sep: dict[str, str] = {
-        "argupt.*" : ",",
+        "argupt.*": ",",
         "machine-.*": ",",
         "train_drcat.*": ",",
         "drcat_v3.*": ",",
