@@ -13,3 +13,17 @@ pip install ai-text-detector
 ## Usage
 
 You can use the library to detect AI-generated text by creating a new instance of the `TextDetector` class and calling
+
+## Contribute
+
+To contribue. First install [uv](https://docs.astral.sh/uv).
+
+Then run, in order:
+
+```bash
+uv venv
+uv sync
+uv tool install mypy
+uv tool install pre-commit
+uv tool install ruff
+```

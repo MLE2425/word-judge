@@ -10,19 +10,36 @@ dependencies = [
     "nltk>=3.9.1",
     "polars>=1.17.1",
     "transformers>=4.47.1",
+    "polars>=1.17.1",
 ]
 
 [dependency-groups]
 dev = [
     "setuptools>=75.6.0",
+    "pre-commit==4.0.1",
 ]
 
 [build-system]
 requires = ["setuptools"]
 build-backend = "setuptools.build_meta"
 
+[project.scripts]
+wordjudge = "src.main:main"
+
 [tool.setuptools.packages]
 find = {}
 
-[project.scripts]
-wordjudge = "src.main:main"
+[tool.ruff]
+
+fix = true
+show-fixes = true
+
+include = ["pyproject.toml", "src/**/*.py", "src/**/*.ipynb", "scripts/**/*.py"]
+
+[tool.ruff.lint]
+
+ignore = ["F841","E203","E501"]
+
+[tool.ruff.format]
+
+docstring-code-format = true

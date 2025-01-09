@@ -6,7 +6,6 @@ from typing import List
 import polars as pl
 from cfg import CFG
 
-
 logger = logging.getLogger(__name__)
 
 
