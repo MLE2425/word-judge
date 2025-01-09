@@ -1,41 +1,69 @@
 import logging
 import string
+from typing import List
 
 import nltk
+import polars as pl
+from tqdm import tqdm
 from transformers import AutoTokenizer
 
 logger = logging.getLogger(__name__)
 
 
-def tokenize(
-    text: str, remove_stopwords: bool, lemmatize: bool
-) -> list[str] | list[list[str]]:
+def tokenize_series(
+    series: pl.Series, remove_stopwords: bool = True, lemmatize: bool = True
+) -> pl.Series:
     tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 
     punctuation: set[str] = set(string.punctuation)
     punctuation.add("’")
 
+    try:
+        lemmatizer = nltk.stem.WordNetLemmatizer()
+    except LookupError:
+        nltk.download("wordnet")
+        lemmatizer = nltk.stem.WordNetLemmatizer()
+
+    try:
+        stopwords = set(nltk.corpus.stopwords.words("english"))
+    except LookupError:
+        nltk.download("stopwords")
+        stopwords = set(nltk.corpus.stopwords.words("english"))
+
+    acc: List[list[str] | list[list[str]]] = [
+        tokenize(
+            value,
+            remove_stopwords,
+            lemmatize,
+            tokenizer,
+            stopwords,
+            punctuation,
+            lemmatizer,
+        )
+        for value in tqdm(series, desc="Tokenizing")
+        if isinstance(value, str)
+    ]
+    return pl.Series(acc)
+
+
+def tokenize(
+    text: str,
+    remove_stopwords: bool,
+    lemmatize: bool,
+    tokenizer: AutoTokenizer,
+    stopwords: set[str],
+    remove_expr: set[str],
+    lemmatizer: nltk.stem.WordNetLemmatizer,
+) -> list[str] | list[list[str]]:
     tokens: list[str] = tokenizer.tokenize(text, add_special_tokens=False)
 
     if remove_stopwords:
-        try:
-            stopwords: set[str] = set(nltk.corpus.stopwords.words("english"))
-            tokens = [token for token in tokens if token not in stopwords]
-        except LookupError:
-            nltk.download("stopwords")
-            stopwords = set(nltk.corpus.stopwords.words("english"))
-            tokens = [token for token in tokens if token not in stopwords]
+        tokens = [token for token in tokens if token not in stopwords]
 
     if lemmatize:
-        try:
-            lemmatizer = nltk.stem.WordNetLemmatizer()
-            tokens = [lemmatizer.lemmatize(token) for token in tokens]
-        except LookupError:
-            nltk.download("wordnet")
-            lemmatizer = nltk.stem.WordNetLemmatizer()
-            tokens = [lemmatizer.lemmatize(token) for token in tokens]
+        tokens = [lemmatizer.lemmatize(token) for token in tokens]
 
-    tokens = [token for token in tokens if token not in punctuation]
+    tokens = [token for token in tokens if token not in remove_expr]
 
     chunk_size: int = 510  # 512 - 2
 
