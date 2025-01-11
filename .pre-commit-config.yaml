@@ -33,6 +33,7 @@ repos:
       args:
       - --fix
       - --ignore=F841,E203,E501
+      - --extend-exclude=*.ipynb
     - id: ruff-format
 
 - repo: https://github.com/pre-commit/mirrors-mypy

@@ -4,7 +4,7 @@ import re
 from typing import List
 
 import polars as pl
-from cfg import CFG
+from src.cfg import CFG
 
 logger = logging.getLogger(__name__)
 

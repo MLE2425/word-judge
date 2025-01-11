@@ -18,3 +18,4 @@ wheels/
 # Data
 data/*.csv
 data/test
+**/output

@@ -6,16 +6,20 @@ readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
     "ipykernel>=6.29.5",
-    "jax>=0.4.37",
+    "jax[cuda12]>=0.4.37",
     "nltk>=3.9.1",
     "polars>=1.17.1",
     "transformers>=4.47.1",
     "polars>=1.17.1",
+    "scikit-learn>=1.6.1",
+    "seaborn>=0.13.2",
+    "numpy>=1.26.3",
+    "pyarrow>=18.1.0",
 ]
 
 [dependency-groups]
 dev = [
-    "setuptools>=75.6.0",
+    "setuptools>=70.0.0",
     "pre-commit==4.0.1",
 ]
 
@@ -43,3 +47,29 @@ ignore = ["F841","E203","E501"]
 [tool.ruff.format]
 
 docstring-code-format = true
+
+[tool.mypy]
+
+ignore_missing_imports = true
+
+[tool.uv.sources]
+torch = [
+  { index = "torch-cpu", marker = "platform_system == 'darwin'"},
+  { index = "torch-gpu", marker = "platform_system != 'darwin'"},
+]
+torchvision = [
+  { index = "torch-cpu", marker = "platform_system == 'darwin'"},
+  { index = "torch-gpu", marker = "platform_system != 'darwin'"},
+]
+llama-cpp-python = [
+  { index = "llama-cpp-python-cpu", marker = "platform_system == 'darwin'"},
+  { index = "llama-cpp-python-gpu", marker = "platform_system != 'darwin'"},
+]
+
+[[tool.uv.index]]
+name = "torch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+
+[[tool.uv.index]]
+name = "torch-gpu"
+url = "https://download.pytorch.org/whl/cu124"
