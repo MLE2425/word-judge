@@ -26,6 +26,10 @@ def load_and_merge_sources() -> pl.DataFrame:
             logger.debug(f"Error reading {csv}")
             continue
 
+        # Pre-processing
+        if CFG.extra_processing.get(key):
+            source = CFG.extra_processing[key](source)
+
         # Mapping features
         source = source.rename(
             {f: CFG.features_map[f] for f in CFG.features_map if f in source.columns}
