@@ -40,9 +40,9 @@ def tokenize_series(
             remove_stopwords,
             lemmatize,
             tokenizer,
-            stopwords,
+            remove_stopwords and stopwords,
             punctuation,
-            lemmatizer,
+            lemmatize and lemmatizer,
         ).__str__()
         for value in tqdm(series, desc="Tokenizing")
         if isinstance(value, str)
@@ -55,16 +55,16 @@ def tokenize(
     remove_stopwords: bool,
     lemmatize: bool,
     tokenizer: PreTrainedTokenizer | PreTrainedTokenizerFast,
-    stopwords: set[str],
+    stopwords: set[str] | bool,
     remove_expr: set[str],
-    lemmatizer: nltk.stem.WordNetLemmatizer,
+    lemmatizer: nltk.stem.WordNetLemmatizer | bool,
 ) -> list[str] | list[list[str]]:
     tokens: list[str] = tokenizer.tokenize(text, add_special_tokens=False)
 
-    if remove_stopwords:
+    if remove_stopwords and type(stopwords) is set:
         tokens = [token for token in tokens if token not in stopwords]
 
-    if lemmatize:
+    if lemmatize and type(lemmatizer) is nltk.stem.WordNetLemmatizer:
         tokens = [lemmatizer.lemmatize(word=token) for token in tokens]
 
     tokens = [token for token in tokens if token not in remove_expr]
