@@ -15,7 +15,7 @@ place, and moreover, them being unsure about the quality of their
 solutions.
 
 > [!Note]
-> ![WordJugdeApp_2025-01-14T20_17_13_602778](https://hackmd.io/_uploads/rymUdE4DJe.svg)
+> ![WordJugdeApp_2025-01-14T20_16_50_961040](https://github.com/user-attachments/assets/510422e8-f597-4f23-a1af-70d32d5b68ea)
 > This motivation text, written by hand, shows that it is still possible to
 > trick any LLM detector if the writing is done in a way that uses as many
 > uncommon terms as possible. Even when the detector is highly precise as
@@ -90,7 +90,7 @@ R2 Score: 0.9614387325926672
 -----------------------------------
 ```
 
-![Learning curve](https://hackmd.io/_uploads/HyI3CVVDkg.png)
+![image](https://github.com/user-attachments/assets/ec9502df-45f6-4cd1-99a5-026854218dde)
 
 
 As we saw good results, we wanted to inspect how the model responded to increasing ammounts of data and see if the training was performing as expected or we saw either over or underfitting as data grew in size. For this we incrementally perform cross-validation training of a regressor over increments of 10% on the full dataset. This results in the following graph, which shows that the model was behaving well to increasing data, showing that with more, clean data its performace would appear to only grow without risking overfitting in training data.
@@ -128,23 +128,21 @@ Upon completing the development of a robust and accurate model, we implemented a
 
 Below are some captures of the application in action:
 
-![WordJugdeApp_2025-01-14T20_49_25_178171](https://hackmd.io/_uploads/S1DPxH4wJx.svg)
+![WordJugdeApp_2025-01-14T20_49_25_178171](https://github.com/user-attachments/assets/20d78954-78f1-45f9-ab3c-d1f85408d635)
 
-![WordJugdeApp_2025-01-14T20_50_04_105188](https://hackmd.io/_uploads/BJ7YeSVDkl.svg)
+![WordJugdeApp_2025-01-14T20_50_04_105188](https://github.com/user-attachments/assets/a65786f5-0071-485d-94aa-be941c18b229)
 
-![WordJugdeApp_2025-01-14T20_51_23_460971](https://hackmd.io/_uploads/rJdteSEvkg.svg)
+![WordJugdeApp_2025-01-14T20_51_23_460971](https://github.com/user-attachments/assets/06ac7d05-9c0a-4064-938b-ed98d47ae55e)
 
-## Installation
 
-To install the library, you can use pip:
-
-```bash
-pip install ai-text-detector
-```
 
 ## Usage
 
-You can use the library to detect AI-generated text by creating a new instance of the `TextDetector` class and calling
+To run the application use 
+
+```bash
+uv run wordjudge
+```
 
 ## Contribute
 
